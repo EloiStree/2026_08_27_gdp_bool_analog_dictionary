@@ -1,0 +1,175 @@
+[gd_scene format=3 uid="uid://b23a72v3fwwcu"]
+
+[ext_resource type="Script" uid="uid://0et3umqbceuu" path="res://addons/2026_08_27_gdp_bool_analog_dictionary/scene/guid/demo_2d_vbox_abstract_boolean_float_input/script/ab_input_dictionary.gd" id="1_6y7x0"]
+[ext_resource type="Script" uid="uid://dfrmfoj0hs3jt" path="res://addons/2026_08_27_gdp_bool_analog_dictionary/scene/guid/demo_2d_vbox_abstract_boolean_float_input/script/ab_ui_input/ab_ui_input_key_name_toggle_changed.gd" id="1_ujbhy"]
+[ext_resource type="Script" uid="uid://ivok83vhxq15" path="res://addons/2026_08_27_gdp_bool_analog_dictionary/scene/guid/demo_2d_vbox_abstract_boolean_float_input/script/ab_input_static_set_with_local_ref_list.gd" id="2_q4k3c"]
+[ext_resource type="Script" uid="uid://m772tdt875te" path="res://addons/2026_08_27_gdp_bool_analog_dictionary/scene/guid/demo_2d_vbox_abstract_boolean_float_input/script/ab_ui_input/ab_ui_input_key_name_button_changed.gd" id="2_x72m0"]
+[ext_resource type="Script" uid="uid://cxosg77d7mdr2" path="res://addons/2026_08_27_gdp_bool_analog_dictionary/scene/guid/demo_2d_vbox_abstract_boolean_float_input/script/ab_ui_input/ab_ui_input_key_name_slider_changed.gd" id="3_u7qgd"]
+[ext_resource type="Script" uid="uid://cyvmefwebvr35" path="res://addons/2026_08_27_gdp_bool_analog_dictionary/scene/guid/demo_2d_vbox_abstract_boolean_float_input/script/ab_ui_input/ab_ui_input_line_edit_toggle_changed.gd" id="4_6s240"]
+[ext_resource type="Script" uid="uid://c8vmp060dh3au" path="res://addons/2026_08_27_gdp_bool_analog_dictionary/scene/guid/demo_2d_vbox_abstract_boolean_float_input/script/ab_ui_input/ab_ui_input_line_edit_slider_changed.gd" id="5_6s240"]
+[ext_resource type="Script" uid="uid://c01yehg82ls25" path="res://addons/2026_08_27_gdp_bool_analog_dictionary/scene/guid/demo_2d_vbox_abstract_boolean_float_input/script/resource/ab_input_resource_analog_value.gd" id="5_12al4"]
+[ext_resource type="Script" uid="uid://dyqfucr3wryqy" path="res://addons/2026_08_27_gdp_bool_analog_dictionary/scene/guid/demo_2d_vbox_abstract_boolean_float_input/script/ab_ui_input/ab_ui_input_line_edit_button_changed.gd" id="5_d8y7q"]
+[ext_resource type="Script" uid="uid://br38ejpq7y2m6" path="res://addons/2026_08_27_gdp_bool_analog_dictionary/scene/guid/demo_2d_vbox_abstract_boolean_float_input/script/ab_input_static_listen_to_value_changed.gd" id="7_v1g80"]
+
+[node name="Demo2dVboxAbstractBooleanFloatInput" type="Control" unique_id=481073214]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=603149540]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer" unique_id=151132709]
+layout_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer/HBoxContainer3" unique_id=1396980527]
+layout_mode = 2
+text = "Xbox A"
+
+[node name="AbUiInputKeyNameToggleChanged" type="Node" parent="VBoxContainer/HBoxContainer3/CheckButton" unique_id=1530872 node_paths=PackedStringArray("_button", "_broadcast")]
+script = ExtResource("1_ujbhy")
+_button = NodePath("..")
+_input_key_name = "Xbox A"
+_broadcast = [NodePath("AbInputStaticSetWithLocalRefList")]
+metadata/_custom_type_script = "uid://dfrmfoj0hs3jt"
+
+[node name="AbInputStaticSetWithLocalRefList" type="Node" parent="VBoxContainer/HBoxContainer3/CheckButton/AbUiInputKeyNameToggleChanged" unique_id=99044063]
+script = ExtResource("2_q4k3c")
+metadata/_custom_type_script = "uid://ivok83vhxq15"
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer3" unique_id=1265397890]
+layout_mode = 2
+text = "Xbox B"
+
+[node name="AbUiInputKeyNameButtonChanged" type="Node" parent="VBoxContainer/HBoxContainer3/Button" unique_id=234794739 node_paths=PackedStringArray("_button", "_broadcast")]
+script = ExtResource("2_x72m0")
+_button = NodePath("..")
+_input_key_name = "Xbox B"
+_broadcast = [NodePath("AbInputStaticSetWithLocalRefList")]
+
+[node name="AbInputStaticSetWithLocalRefList" type="Node" parent="VBoxContainer/HBoxContainer3/Button/AbUiInputKeyNameButtonChanged" unique_id=1384038704]
+script = ExtResource("2_q4k3c")
+metadata/_custom_type_script = "uid://ivok83vhxq15"
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3" unique_id=428798704]
+layout_mode = 2
+text = "Trigger Left"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/HBoxContainer3" unique_id=1245283479]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AbUiInputKeyNameSliderChanged" type="Node" parent="VBoxContainer/HBoxContainer3/HSlider" unique_id=149878812 node_paths=PackedStringArray("_slider", "_broadcast")]
+script = ExtResource("3_u7qgd")
+_slider = NodePath("..")
+_input_key_name = "Xbox Trigger"
+_broadcast = [NodePath("AbInputStaticSetWithLocalRefList")]
+metadata/_custom_type_script = "uid://cxosg77d7mdr2"
+
+[node name="AbInputStaticSetWithLocalRefList" type="Node" parent="VBoxContainer/HBoxContainer3/HSlider/AbUiInputKeyNameSliderChanged" unique_id=1023529358]
+script = ExtResource("2_q4k3c")
+metadata/_custom_type_script = "uid://ivok83vhxq15"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1587134131]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer2" unique_id=1837485476]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mockup Device|0|A1"
+placeholder_text = "Device Name"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/HBoxContainer2" unique_id=686076115]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AbUiInputLineEditSliderChanged" type="Node" parent="VBoxContainer/HBoxContainer2/HSlider" unique_id=578374081 node_paths=PackedStringArray("_slider", "_line_edit", "_broadcast")]
+script = ExtResource("5_6s240")
+_slider = NodePath("..")
+_line_edit = NodePath("../../LineEdit")
+_broadcast = [NodePath("AbInputStaticSetWithLocalRefList")]
+metadata/_custom_type_script = "uid://c8vmp060dh3au"
+
+[node name="AbInputStaticSetWithLocalRefList" type="Node" parent="VBoxContainer/HBoxContainer2/HSlider/AbUiInputLineEditSliderChanged" unique_id=1700297818]
+script = ExtResource("2_q4k3c")
+metadata/_custom_type_script = "uid://ivok83vhxq15"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer" unique_id=813188200]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer4" unique_id=2049444919]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mockup Device|0|B3"
+placeholder_text = "Device Name"
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer4" unique_id=696493115]
+layout_mode = 2
+text = "Button"
+
+[node name="AbUiInputLineEditButtonChanged" type="Node" parent="VBoxContainer/HBoxContainer4/Button" unique_id=1152506678 node_paths=PackedStringArray("_button", "_line_edit", "_broadcast")]
+script = ExtResource("5_d8y7q")
+_button = NodePath("..")
+_line_edit = NodePath("../../LineEdit")
+_broadcast = [NodePath("AbInputStaticSetWithLocalRefList")]
+metadata/_custom_type_script = "uid://dyqfucr3wryqy"
+
+[node name="AbInputStaticSetWithLocalRefList" type="Node" parent="VBoxContainer/HBoxContainer4/Button/AbUiInputLineEditButtonChanged" unique_id=2146298046]
+script = ExtResource("2_q4k3c")
+metadata/_custom_type_script = "uid://ivok83vhxq15"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer" unique_id=569041595]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer5" unique_id=137420163]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mockup Device|0|B4"
+placeholder_text = "Device Name"
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer/HBoxContainer5" unique_id=1733020772]
+layout_mode = 2
+
+[node name="AbUiInputLineEditToggleChanged" type="Node" parent="VBoxContainer/HBoxContainer5/CheckButton" unique_id=1124185313 node_paths=PackedStringArray("_button", "_line_edit", "_broadcast")]
+script = ExtResource("4_6s240")
+_button = NodePath("..")
+_line_edit = NodePath("../../LineEdit")
+_broadcast = [NodePath("AbInputStaticSetWithLocalRefList")]
+metadata/_custom_type_script = "uid://cyvmefwebvr35"
+
+[node name="AbInputStaticSetWithLocalRefList" type="Node" parent="VBoxContainer/HBoxContainer5/CheckButton/AbUiInputLineEditToggleChanged" unique_id=1861514139]
+script = ExtResource("2_q4k3c")
+metadata/_custom_type_script = "uid://ivok83vhxq15"
+
+[node name="Label Bool" type="Label" parent="VBoxContainer" unique_id=93775180]
+layout_mode = 2
+
+[node name="Label Analog" type="Label" parent="VBoxContainer" unique_id=1866033729]
+layout_mode = 2
+
+[node name="Label Any" type="Label" parent="VBoxContainer" unique_id=1385366750]
+layout_mode = 2
+
+[node name="Analog Bool Dictionary" type="Node" parent="." unique_id=1307409614]
+script = ExtResource("1_6y7x0")
+_analog_dictionary = Dictionary[String, ExtResource("5_12al4")]({
+"": null
+})
+_is_singleton = true
+metadata/_custom_type_script = "uid://0et3umqbceuu"
+
+[node name="Listen To Change" type="Node" parent="." unique_id=1269944720]
+script = ExtResource("7_v1g80")
+metadata/_custom_type_script = "uid://br38ejpq7y2m6"
+
+[connection signal="on_analog_value_changed_as_string" from="Listen To Change" to="VBoxContainer/Label Analog" method="set_text"]
+[connection signal="on_any_value_changed_as_string" from="Listen To Change" to="VBoxContainer/Label Any" method="set_text"]
+[connection signal="on_boolean_value_changed_as_string" from="Listen To Change" to="VBoxContainer/Label Bool" method="set_text"]
