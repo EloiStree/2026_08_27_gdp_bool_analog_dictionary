@@ -74,19 +74,22 @@ func set_boolean_from_device_name(device_name:String, value:bool):
 
 #region GET
 func get_analog_from_device_name(device_name:String) -> float:
+	device_name =device_name.to_lower()
 	_create_analog_if_not_existing(device_name)
 	return _analog_dictionary[device_name].get_analog_value()
 
 func get_boolean_from_device_name(device_name:String) -> bool:
+	device_name =device_name.to_lower()
 	_create_boolean_if_not_existing(device_name)
 	return _boolean_dictionary[device_name].get_boolean_value()
 
-
 func get_analog_resource_reference_from_device_name(device_name:String) -> AbInputResourceAnalogValue:
+	device_name =device_name.to_lower()
 	_create_analog_if_not_existing(device_name)
 	return _analog_dictionary[device_name]
 
 func get_boolean_resource_reference_from_device_name(device_name:String) -> AbInputResourceBooleanValue:
+	device_name =device_name.to_lower()
 	_create_boolean_if_not_existing(device_name)
 	return _boolean_dictionary[device_name]
 
@@ -115,6 +118,7 @@ func remove_boolean_value_changed_listener(device_name:String, callable:Callable
 
 #region private
 func _create_analog_if_not_existing(device_name:String) -> void:
+	device_name = device_name.to_lower()
 	if not _analog_dictionary.has(device_name):
 		var analog_resource :AbInputResourceAnalogValue = AbInputResourceAnalogValue.new()
 		analog_resource._analog_name_id = device_name
