@@ -12,7 +12,6 @@ var _device_trigers_to_commands:Dictionary[String,AbInputStoreDeviceTriggersToCo
 func append_action(device_name:String, trigger_event:String, action:String) -> void:
 	device_name = device_name.strip_edges().to_lower()
 
-	print("---> ADD: ", device_name, "  Event:", trigger_event)
 	if _use_debug_print:
 		print("Received: ", device_name, "  Event:", trigger_event)
 
@@ -22,7 +21,6 @@ func append_action(device_name:String, trigger_event:String, action:String) -> v
 	_device_trigers_to_commands[device_name].append_action(trigger_event, action)
 
 func trigger_action(device_name:String, trigger_event:String) -> void:
-	print("---> trigger_action: ", device_name, "  Event:", trigger_event)
 	device_name = device_name.strip_edges().to_lower()
 	if _device_trigers_to_commands.has(device_name):
 		var actions = _device_trigers_to_commands[device_name].get_actions_for_trigger_name(trigger_event)
