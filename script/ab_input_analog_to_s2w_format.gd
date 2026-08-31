@@ -5,6 +5,10 @@ signal on_index_integer_changed(
 	player_index: int,
 	value: int
 )
+signal on_index_integer_changed_with_anti_spam(
+	player_index: int,
+	value: int
+)
 
 signal on_index_integer_changed_formated(text:String)
 
@@ -82,6 +86,42 @@ func _append_ab_input_analog_to_motor_with_callback(
 
 
 
+@export var _frame_check_interval: float = 0.1
+var _frame_check_timer: float = 0.0
+
+func _ready():
+	set_process(true)
+
+func _process(delta: float) -> void:
+	_frame_check_timer += delta
+	if _frame_check_timer >= _frame_check_interval:
+		_frame_check_timer = 0.0
+		frame_check()
+
+func frame_check() -> void:
+	for analog_to_gamepad_joystick in _analog_to_gamepad_joysticks:
+		if analog_to_gamepad_joystick.send_info_cooldown_timer > 0.0:
+			analog_to_gamepad_joystick.send_info_cooldown_timer -= _frame_check_interval
+		if analog_to_gamepad_joystick.send_info_cooldown_timer <= 0.0:
+			analog_to_gamepad_joystick.send_info_cooldown_timer = 0.0
+		if analog_to_gamepad_joystick.send_info_cooldown_timer == 0.0 and \
+			analog_to_gamepad_joystick.last_frame_check_value != analog_to_gamepad_joystick.previous_value:
+			analog_to_gamepad_joystick.send_info_cooldown_timer = 0.1
+			analog_to_gamepad_joystick.last_frame_check_value = analog_to_gamepad_joystick.previous_value
+			on_index_integer_changed_with_anti_spam.emit(analog_to_gamepad_joystick.player_index, analog_to_gamepad_joystick.previous_value)
+
+	for analog_to_gamepad_motor in _analog_to_gamepad_motors:
+		if analog_to_gamepad_motor.send_info_cooldown_timer > 0.0:
+			analog_to_gamepad_motor.send_info_cooldown_timer -= _frame_check_interval
+		if analog_to_gamepad_motor.send_info_cooldown_timer <= 0.0:
+			analog_to_gamepad_motor.send_info_cooldown_timer = 0.0
+		if analog_to_gamepad_motor.send_info_cooldown_timer == 0.0 and \
+			analog_to_gamepad_motor.last_frame_check_value != analog_to_gamepad_motor.previous_value:
+			analog_to_gamepad_motor.send_info_cooldown_timer = 0.1
+			analog_to_gamepad_motor.last_frame_check_value = analog_to_gamepad_motor.previous_value
+			on_index_integer_changed_with_anti_spam.emit(analog_to_gamepad_motor.destination_player_index, analog_to_gamepad_motor.previous_value)
+
+
 class AbInputGamepadS2W:
 	enum { JLH, JLV, JRH, JRV }
 
@@ -105,6 +145,10 @@ class AbInputGamepadS2W:
 	var source_jrv_name_ref: AbInputResourceAnalogValue
 
 	var index_integer_changed_callback: Callable
+
+
+	var last_frame_check_value:int
+	var send_info_cooldown_timer: float = 0.1
 
 
 	func _init(
@@ -183,13 +227,15 @@ class AbInputMotorS2W:
 	var destination_motor_index: int
 	const destination_min_value: float =1
 	const destination_max_value: float =99999
-
+	
 	var index_integer_changed_callback: Callable
 
 	var ref_source: AbInputResourceAnalogValue
 
 	var motor_value_as_s2w: int =0
 	var previous_value:int
+	var last_frame_check_value:int
+	var send_info_cooldown_timer: float = 0.0
 
 	func _init(
 		source_name: String,

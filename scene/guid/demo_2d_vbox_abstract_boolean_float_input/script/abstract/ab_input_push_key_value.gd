@@ -7,16 +7,6 @@ signal on_device_event_value_relayed(key_name:String, trigger_value:String)
 
 
 
-@export var _input_name_for_primitive:String
-func trigger_event_with_inspector_input_name(trigger_value:String):
-	trigger_event_with_input_name(_input_name_for_primitive,trigger_value)
-	
-func set_analog_value_with_inspector_input_name(analog_value:float):
-	set_analog_value(_input_name_for_primitive,analog_value)
-
-func set_boolean_value_with_inspector_input_name(boolean_value:bool):
-	set_boolean_value(_input_name_for_primitive,boolean_value)
-
 func set_analog_value(key_name:String, analog_value:float):
 	_on_analog_value_relayed(key_name, analog_value)
 	on_analog_value_relayed.emit(key_name, analog_value)
